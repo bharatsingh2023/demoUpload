@@ -1,0 +1,38 @@
+-- Table: iocl.tb_customer_sales_area_partner_function
+
+-- DROP TABLE IF EXISTS iocl.tb_customer_sales_area_partner_function;
+
+CREATE TABLE IF NOT EXISTS iocl.tb_customer_sales_area_partner_function
+(
+    customer_sales_area_partner_function_id bigint NOT NULL,
+    created timestamp without time zone NOT NULL,
+    created_by character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    modified timestamp without time zone NOT NULL,
+    modified_by character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    customer_id bigint,
+    customer_sales_area_data_id bigint,
+    partner_function_id bigint,
+    record_status character varying(255) COLLATE pg_catalog."default" DEFAULT 'ACTIVE'::character varying,
+    date_archived character varying(255) COLLATE pg_catalog."default",
+    index integer,
+    column12 character varying(50) COLLATE pg_catalog."default",
+    column13 character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT tb_customer_sales_area_partner_function_pkey PRIMARY KEY (customer_sales_area_partner_function_id),
+    CONSTRAINT fk2hh131bm4kaip84866kwcr7rq FOREIGN KEY (partner_function_id)
+        REFERENCES iocl.tb_partner_function (partner_function_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk2ns723vknxswdgv9hwiguewk0 FOREIGN KEY (customer_sales_area_data_id)
+        REFERENCES iocl.tb_customer_sales_area_data (customer_sales_area_data_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS iocl.tb_customer_sales_area_partner_function
+    OWNER to prixlence;
+
+GRANT ALL ON TABLE iocl.tb_customer_sales_area_partner_function TO prixlence;
+
+GRANT ALL ON TABLE iocl.tb_customer_sales_area_partner_function TO replicauser;

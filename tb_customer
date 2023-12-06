@@ -1,0 +1,73 @@
+-- Table: iocl.tb_customer
+
+-- DROP TABLE IF EXISTS iocl.tb_customer;
+
+CREATE TABLE IF NOT EXISTS iocl.tb_customer
+(
+    customer_id bigint NOT NULL,
+    created timestamp without time zone NOT NULL,
+    created_by character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    modified timestamp without time zone NOT NULL,
+    modified_by character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    code character varying(255) COLLATE pg_catalog."default",
+    name character varying(1024) COLLATE pg_catalog."default",
+    name2 character varying(255) COLLATE pg_catalog."default",
+    name3 character varying(255) COLLATE pg_catalog."default",
+    name4 character varying(255) COLLATE pg_catalog."default",
+    reg_number character varying(255) COLLATE pg_catalog."default",
+    short_name character varying(255) COLLATE pg_catalog."default",
+    status character varying(255) COLLATE pg_catalog."default",
+    account_group_id bigint,
+    city_state_id bigint,
+    contact_id bigint,
+    country_id bigint,
+    industry_id bigint,
+    port_id bigint,
+    customer_type_id bigint,
+    name_with_code character varying(255) COLLATE pg_catalog."default",
+    record_status character varying(255) COLLATE pg_catalog."default" DEFAULT 'ACTIVE'::character varying,
+    uuid character varying(255) COLLATE pg_catalog."default",
+    date_archived character varying(255) COLLATE pg_catalog."default",
+    column25 character varying(50) COLLATE pg_catalog."default",
+    column26 character varying(50) COLLATE pg_catalog."default",
+    column27 character varying(50) COLLATE pg_catalog."default",
+    column28 character varying(50) COLLATE pg_catalog."default",
+    column29 character varying(50) COLLATE pg_catalog."default",
+    column11 character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT tb_customer_pkey PRIMARY KEY (customer_id),
+    CONSTRAINT customer_uniq UNIQUE (code, date_archived),
+    CONSTRAINT tb_customer_code_date_archived_key UNIQUE (code, date_archived),
+    CONSTRAINT fk5tqgdmjfe9vc3mf0nwefoq4c8 FOREIGN KEY (city_state_id)
+        REFERENCES iocl.tb_city_state (city_state_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk9e5hovhfvv16in8i32mbox2au FOREIGN KEY (industry_id)
+        REFERENCES iocl.tb_industry (industry_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkbrm8th7wfscvuebiqbeye0vpp FOREIGN KEY (customer_type_id)
+        REFERENCES iocl.tb_customer_type (customer_type_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkd4pr63h4qil5urrb616945mnp FOREIGN KEY (account_group_id)
+        REFERENCES iocl.tb_account_group (account_group_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkflf4p7s74f1yifjrs2t9xfy12 FOREIGN KEY (country_id)
+        REFERENCES iocl.tb_country (country_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkqaw8cct93q28r5anovumusd21 FOREIGN KEY (port_id)
+        REFERENCES iocl.tb_port (port_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS iocl.tb_customer
+    OWNER to prixlence;
+
+GRANT ALL ON TABLE iocl.tb_customer TO prixlence;
+
+GRANT ALL ON TABLE iocl.tb_customer TO replicauser;

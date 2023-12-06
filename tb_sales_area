@@ -1,0 +1,85 @@
+-- Table: iocl.tb_customer_sales_area_data
+
+-- DROP TABLE IF EXISTS iocl.tb_customer_sales_area_data;
+
+CREATE TABLE IF NOT EXISTS iocl.tb_customer_sales_area_data
+(
+    customer_sales_area_data_id bigint NOT NULL,
+    created timestamp without time zone NOT NULL,
+    created_by character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    modified timestamp without time zone NOT NULL,
+    modified_by character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    order_block character varying(255) COLLATE pg_catalog."default",
+    status character varying(255) COLLATE pg_catalog."default",
+    currency_id bigint,
+    customer_id bigint,
+    delivery_plant_id bigint,
+    exchange_rate_type_id bigint,
+    incoterm_id bigint,
+    payment_method_id bigint,
+    payment_term_id bigint,
+    sales_area_id bigint,
+    sales_group_id bigint,
+    sales_office_id bigint,
+    shipping_condition_id bigint,
+    record_status character varying(255) COLLATE pg_catalog."default" DEFAULT 'ACTIVE'::character varying,
+    date_archived character varying(255) COLLATE pg_catalog."default",
+    column21 character varying(50) COLLATE pg_catalog."default",
+    column22 character varying(50) COLLATE pg_catalog."default",
+    column23 character varying(50) COLLATE pg_catalog."default",
+    column24 character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT tb_customer_sales_area_data_pkey PRIMARY KEY (customer_sales_area_data_id),
+    CONSTRAINT fk2n1w37v7277xkfrmaw7dhd4ik FOREIGN KEY (shipping_condition_id)
+        REFERENCES iocl.tb_shipping_condition (shipping_condition_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk4irsxiwtl2wkrup02u361odrr FOREIGN KEY (exchange_rate_type_id)
+        REFERENCES iocl.tb_exchange_rate_type (exchange_rate_type_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk562wb5cs447f6xpgddvei9qd6 FOREIGN KEY (incoterm_id)
+        REFERENCES iocl.tb_incoterm (incoterm_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk6bumu0kny5udy02mh258ct00m FOREIGN KEY (currency_id)
+        REFERENCES iocl.tb_currency (currency_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk6ley5hxgyh8878rq6eqv53dg0 FOREIGN KEY (delivery_plant_id)
+        REFERENCES iocl.tb_plant (plant_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk8a8vkhqgcr6pergfju37hcduq FOREIGN KEY (payment_method_id)
+        REFERENCES iocl.tb_payment_method (payment_method_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fke2dqvngbjfbcpxywqjr7rria5 FOREIGN KEY (customer_id)
+        REFERENCES iocl.tb_customer (customer_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkje5uknk4nfkca6xt5f4wttvq0 FOREIGN KEY (sales_group_id)
+        REFERENCES iocl.tb_sales_group (sales_group_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkr67qxnmcyb7spk9qe5xlyesq5 FOREIGN KEY (sales_office_id)
+        REFERENCES iocl.tb_sales_office (sales_office_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkrdw8a9qd1kcfbbo9upeiqlyqr FOREIGN KEY (payment_term_id)
+        REFERENCES iocl.tb_payment_term (payment_term_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fkujvdrhw6o7qwag4m68p6fj19 FOREIGN KEY (sales_area_id)
+        REFERENCES iocl.tb_sales_area (sales_area_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS iocl.tb_customer_sales_area_data
+    OWNER to prixlence;
+
+GRANT ALL ON TABLE iocl.tb_customer_sales_area_data TO prixlence;
+
+GRANT ALL ON TABLE iocl.tb_customer_sales_area_data TO replicauser;
