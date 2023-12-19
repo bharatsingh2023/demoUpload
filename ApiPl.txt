@@ -1,0 +1,2 @@
+[10:37 AM] Jamyang Lotus (Guest)
+curl -X POST "https://api.platts.com/auth/api" -H "accept: application/json" -H "appkey: ILWhWevStDzHEtjhjpsE" -H "Content-Type: application/x-www-form-urlencoded" -d "username=BDNatGas%40indianoil.in&password=Bdgas%40789"
